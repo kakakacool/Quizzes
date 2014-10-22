@@ -8,13 +8,63 @@ block content
 				.form-group
 					.col-md-12
 						label(for="email") Email address
-						input(autocomplete='false' type="email" class="form-control" id="email" placeholder="Enter email")
+						input(autocomplete='false' type="email" class="form-control" name="email"
+						 id="email" placeholder="Enter email")
 				.form-group
 					.col-md-12
 						label(for="password") Password
-						input(type="password" class="form-control" id="password" placeholder="Enter Password")
+						input(type="password" class="form-control" id="password" 
+							placeholder="Enter Password" name="password")
 				.form-group
-					.col-md-2
-						button.btn.btn-success	Log In
-					.col-md-2.col-md-offset-1
-						button.btn.btn-info	Registration					
+					.col-md-12
+						button.btn.btn-success.btn-block#login	Log In
+				.form-group		
+					.col-md-12
+						button.btn.btn-danger.btn-block#register	Registration
+	<br/>
+	.row
+		.alert-warning.col-md-4.col-md-offset-4
+	.row
+		.alert-success.col-md-4.col-md-offset-4		
+	script.
+		$("#login").on('click',function(e){
+			e.preventDefault();
+			var email=$("#email").val().trim();
+			var password=$("#password").val().trim();
+			if(!email){
+				$("#email").addClass("alert-danger");
+			}
+			if(!password){
+				$("#password").addClass("alert-danger");
+			}
+			if(!password||!email)
+				return;
+			$.post("/users",{email:email,password:password},function(data){
+				if(data.success){
+					$(".alert-success").html(data.text);
+				}else{
+					$(".alert-warning").html(data.text);
+				}
+			});
+		});
+		$("#register").on('click',function(e){
+			e.preventDefault();
+			var email=$("#email").val().trim();
+			var password=$("#password").val().trim();
+			if(!email){
+				$("#email").addClass("alert-danger");
+			}
+			if(!password){
+				$("#password").addClass("alert-danger");
+			}
+			if(!password||!email)
+				return;
+			$.post("/",{email:email,password:password},function(data){
+				if(data.success){
+					$(".alert-success").html(data.text);
+				}else{
+					$(".alert-warning").html(data.text);
+				}
+				
+			});
+		});

@@ -1,11 +1,15 @@
 var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
-var userSchema=new Schema({
-	email:{type:String,unique:true,required:true,index:true},
-	password:{type:String,required:true,index:true}
-})
+var userSchema=require('./register').userSchema;
+var model=mongoose.model('users',userSchema);
 
 exports.user=function(req,res){
-
-	res.redirect("/user");
+	model.find({email:req.body.email,password:req.body.password},function(err,data){
+		if(err||data.length==0){
+			res.json({success:false,text:"User not found!"}); 
+		}
+		else{
+			res.json({success:true,text:"User found"});	
+		}
+	});
 }
