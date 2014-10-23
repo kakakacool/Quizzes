@@ -21,11 +21,12 @@ block content
 				.form-group		
 					.col-md-12
 						button.btn.btn-danger.btn-block#register	Registration
-	<br/>
-	.row
-		.alert-warning.col-md-4.col-md-offset-4
-	.row
-		.alert-success.col-md-4.col-md-offset-4		
+				.form-group
+					.col-md-12
+						.alert-warning.index
+				.form-group
+					.col-md-12
+						.alert-success.index
 	script.
 		$("#login").on('click',function(e){
 			e.preventDefault();
@@ -44,6 +45,7 @@ block content
 					$(".alert-success").html(data.text);
 				}else{
 					$(".alert-warning").html(data.text);
+					$(".alert-success").html("");
 				}
 			});
 		});
@@ -62,6 +64,7 @@ block content
 			$.post("/",{email:email,password:password},function(data){
 				if(data.success){
 					$(".alert-success").html(data.text);
+					$(".alert-warning").html("");
 				}else{
 					$(".alert-warning").html(data.text);
 				}

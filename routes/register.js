@@ -1,7 +1,7 @@
 var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 var userSchema=new Schema({
-	email:{type:String,unique:true,required:true,index:true},
+	email:{type:String,index: { unique: true }},
 	password:{type:String,required:true}
 })
 var model=mongoose.model("users",userSchema);
