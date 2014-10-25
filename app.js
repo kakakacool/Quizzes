@@ -4,7 +4,8 @@ var methodOverride=require("method-override");
 var cookieParser=require("cookie-parser");
 var stylus=require("stylus");
 var routes=require("./routes");
-var userRoute=require("./routes/user");
+var loginRoute=require("./routes/login");
+var usersRoute=require("./routes/users");
 var registerRoute=require("./routes/register");
 var app=express();
 
@@ -23,6 +24,7 @@ app.set('views',__dirname+'/views');
 app.set('view engine','jade');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+app.use(cookieParser())
 app.use(methodOverride());
 app.use(stylus.middleware('./public'));
 app.use(express.static(__dirname+"/public"));
@@ -36,8 +38,8 @@ router
 
 router
 	.route('/users')
-		.post(userRoute.user)
-
+		.get(usersRoute.users)
+		.post(loginRoute.login)
 
 app.use("/",router);
 

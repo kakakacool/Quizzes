@@ -17,7 +17,7 @@ block content
 							placeholder="Enter Password" name="password")
 				.form-group
 					.col-md-12
-						button.btn.btn-success.btn-block#login	Log In
+						button.btn.btn-success.btn-block#login	log	In
 				.form-group		
 					.col-md-12
 						button.btn.btn-danger.btn-block#register	Registration
@@ -42,7 +42,7 @@ block content
 				return;
 			$.post("/users",{email:email,password:password},function(data){
 				if(data.success){
-					$(".alert-success").html(data.text);
+					window.location="/users";
 				}else{
 					$(".alert-warning").html(data.text);
 					$(".alert-success").html("");
