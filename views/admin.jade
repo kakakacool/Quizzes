@@ -1,0 +1,44 @@
+extends layout
+block content
+	.page-header 
+		h1(align='center') Quizzes #{title}
+	.row
+		.col-md-12
+			button.btn.btn-success.btn-lg(align='right' data-toggle="modal" data-target="#Quizzes") add Quizzes
+			.modal.fade#Quizzes(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
+				.modal-dialog.modal-sm
+					.modal-content
+						form(role='form' method='POST')
+							.form-group
+								label(for='name') Quizzes name
+								input#quizzesName.form-control(type='text', placeholder='Enter Quizzes Name')
+							.form-group
+								label(for='images') Image For Quizzes
+								input#quizzesImage(type='file')
+							button.btn.btn-primary#addQuizzes(type='submit') Add Quizze
+						.alert.alert-danger#createQuizzes
+	script.
+		$('#addQuizzes').on('click',function(e){
+			e.preventDefault();
+			var quizzesName=$("#quizzesName").val();
+			var quizzesImage=$("#quizzesImage").val().split("\\");
+			quizzesImage="/images/"+quizzesImage[quizzesImage.length-1];
+			if(quizzesName==""||quizzesImage==""){
+				$("#createQuizzes").html("Fill all fields");				
+			}else{
+				$.post('/admin',{name:quizzesName,url:quizzesImage},function(data){
+					if(data.success){
+						$("#createQuizzes").removeClass("alert-danger");
+						$("#createQuizzes").addClass("alert-success");
+						$("#createQuizzes").html(data.text);
+						$("#addQuizzes").addClass("disabled");
+						setTimeout(function(){
+							window.location='/admin';
+						},1200);
+					}else{
+						$("#createQuizzes").addClass("alert-danger");
+						$("#createQuizzes").html(data.text);	
+					}
+				});
+			}
+		});

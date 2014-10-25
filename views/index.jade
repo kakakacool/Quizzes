@@ -23,7 +23,7 @@ block content
 						button.btn.btn-danger.btn-block#register	Registration
 				.form-group
 					.col-md-12
-						.alert-warning.index
+						.alert-danger.index
 				.form-group
 					.col-md-12
 						.alert-success.index
@@ -42,9 +42,13 @@ block content
 				return;
 			$.post("/users",{email:email,password:password},function(data){
 				if(data.success){
-					window.location="/users";
+					if(email=="admin@gmail.com"){
+						window.location="/admin";
+					}else{
+						window.location="/users";
+					}
 				}else{
-					$(".alert-warning").html(data.text);
+					$(".alert-danger").html(data.text);
 					$(".alert-success").html("");
 				}
 			});
@@ -64,9 +68,9 @@ block content
 			$.post("/",{email:email,password:password},function(data){
 				if(data.success){
 					$(".alert-success").html(data.text);
-					$(".alert-warning").html("");
+					$(".alert-danger").html("");
 				}else{
-					$(".alert-warning").html(data.text);
+					$(".alert-danger").html(data.text);
 				}
 				
 			});

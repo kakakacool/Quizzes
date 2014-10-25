@@ -6,6 +6,8 @@ var stylus=require("stylus");
 var routes=require("./routes");
 var loginRoute=require("./routes/login");
 var usersRoute=require("./routes/users");
+var adminRoute=require("./routes/admin");
+var addQuizzes=require("./routes/addQuizzes");
 var registerRoute=require("./routes/register");
 var app=express();
 
@@ -40,6 +42,13 @@ router
 	.route('/users')
 		.get(usersRoute.users)
 		.post(loginRoute.login)
+
+router
+	.route('/admin')
+		.get(adminRoute.admin)
+		.post(addQuizzes.addQuizzes)
+
+
 
 app.use("/",router);
 
