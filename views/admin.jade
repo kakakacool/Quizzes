@@ -2,10 +2,11 @@ extends layout
 block content
 	.page-header 
 		h1(align='center') Quizzes #{title}
+	// Add Tests
 	.row
 		.col-md-12
-			button.btn.btn-success.btn-lg(data-toggle='modal', data-target='#Tests') add Test
-			#Tests.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+			button.btn.btn-success.btn-lg(data-toggle='modal', data-target='#Tests') Create Test
+			.modal.fade#Tests(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
 				.modal-dialog
 					.modal-content
 						.modal-header
@@ -25,13 +26,46 @@ block content
 						.modal-footer
 							button.btn.btn-primary#addTests(type='submit') Add Test
 							button.btn.btn-default(type='button', data-dismiss='modal') Close
+	// Add Quiestions
+	.row
+		.col-md-12
+			.modal.fade#addQuestions(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+				.modal-dialog
+					.modal-content
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4#myModalLabel.modal-title(align='center').alert-warning Fill all fields otherwise questions will not be saved
+						.modal-body
+							form(role='form' method='POST' class='forma').questionsForm
+								.form-group.row(style='border:1px solid orange;border-radius:5px')
+									.col-md-10.col-md-offset-1
+										.form-group
+											label(for='name') Question:
+											textarea.questionText.form-control(placeholder='Enter question')
+										.form-group.answers
+											label(for='answers')	Answers:
+											input.answer.form-control(placeholder='Enter answer' type='text')
+											input.answer.form-control(placeholder='Enter answer' type='text')
+											input.answer.form-control(placeholder='Enter correct answer' type='number')
+											button.btn.btn-default.addAnswer add answer
+							button.btn.btn-success#addQuestion add new Quiestion
+						.modal-footer
+							button.btn.btn-primary#saveQuestion(type='submit') Save Questions
+							button.btn.btn-default(type='button', data-dismiss='modal') Close
+							.alert#questionResult(align='center')
+	// Change Quiestions
+
+	// Delete Quiestions
+
 	.row
 		.col-md-12#Tests
 			ul.list-inline
 				- for (var i in tests) {
 					li.col-md-2
 						img(src='#{tests[i].url}')
-						button.btn.btn-success.btn-block.add(name='#{tests[i].name}') Add Questions 
+						button.btn.btn-success.btn-block.add(name='#{tests[i].name}',data-toggle='modal', data-target='#addQuestions' data-backdrop="static") Add Questions 
 						button.btn.btn-warning.btn-block.change(name='#{tests[i].name}') Change Questions
 						button.btn.btn-danger.btn-block.delete(name='#{tests[i].name}') Delete Test
 				- }
@@ -41,6 +75,7 @@ block content
 
 
 	script.
+		
 		$('#addTests').on('click',function(e){
 			e.preventDefault();
 			var testsName=$("#testsName").val();
@@ -69,15 +104,87 @@ block content
 
 
 		//add questions
-		$(".add").on('click',function(){
-			alert($(this).attr('name'))
+		var test="";
+		$('.add').on('click',function(){
+			test=$(this).attr('name');
+		})
+		$("#saveQuestion").on('click',function(){
+			var children=$('.questionsForm').children();
+			var n=children.length;
+			var questions=[];
+			for(var i=0;i<n;i++){
+				var questionText=$(children[i]).find('textarea');
+				var answers=$(children[i]).find('input');
+				var obj={text:"",answers:[],test:""};
+				obj.text=$(questionText).val();
+				for(var j=0;j<answers.length-1;j++){
+					obj.answers.push($(answers[j]).val());
+				}
+				if(!eval($(answers[answers.length-1]).val())){
+					obj.answers.push(-1);
+				}
+				else{
+					obj.answers.push(Number($(answers[answers.length-1]).val()));
+				}
+
+				obj.test=test;
+				questions.push(obj);
+			}
+			$.post('/admin/question',{arr:JSON.stringify(questions)},function(data){
+				if(data.success){
+						$("#questionResult").removeClass("alert-danger");
+						$("#questionResult").addClass("alert-success");
+						$("#questionResult").html(data.text);
+						$("#addTests").addClass("disabled");
+						setTimeout(function(){
+							window.location='/admin';
+						},1000);
+					}else{
+						$("#questionResult").addClass("alert-danger");
+						$("#questionResult").html(data.text);
+						setTimeout(function(){
+							window.location='/admin';
+						},1000);	
+					}
+			});
+			
 		});
+
+		$(".addAnswer").on('click',function(e){
+			e.preventDefault();
+			$(this).prev().before("<input class='answer form-control' placeholder='Enter answer' type='text'>");
+		})
+						
+		$("#addQuestion").on('click',function(e){
+			e.preventDefault();
+			$('.questionsForm').append(
+				"<div class='form-group row' style='border:1px solid orange;border-radius:5px'>"+
+					"<div class='col-md-10 col-md-offset-1'>"+
+						"<div class='form-group'>"+
+							"<label for='name'>Question:</label>"+
+							"<textarea class='form-control questionText' placeholder='Enter question'></textarea>"+
+						"</div>"+
+						"<div class='form-group answers'>"+
+							"<label for='answers'>Answers:</label>"+
+							"<input class='answer form-control' placeholder='Enter answer' type='text'>"+
+							"<input class='answer form-control' placeholder='Enter answer' type='text'>"+
+							"<input class='answer form-control' placeholder='Enter correct answer' type='number'>"+
+							"<button class='btn btn-default addAnswer'>add answer</button>"+
+						"</div>"+
+					"</div>"+
+				"</div>");
+			$(".addAnswer").on('click',function(e){
+				e.preventDefault();
+				$(this).prev().before("<input class='answer form-control' placeholder='Enter answer' type='text'>");
+			})
+		})
 
 		//change question
 		$(".change").on('click',function(){
 			//- alert($(this).attr('name'))
 
 		});
+
 
 		//delete test
 		$(".delete").on('click',function(){
