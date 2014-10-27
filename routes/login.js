@@ -1,6 +1,5 @@
 var mongoose=require('mongoose');
-var Schema=mongoose.Schema;
-var userSchema=require('./register').userSchema;
+var userSchema=require('./schemaDB/user').userSchema;
 var model=mongoose.model('users',userSchema);
 
 exports.login=function(req,res){

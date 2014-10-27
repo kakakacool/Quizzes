@@ -1,9 +1,5 @@
 var mongoose=require('mongoose');
-var Schema=mongoose.Schema;
-var userSchema=new Schema({
-	email:{type:String,index: { unique: true },required:true},
-	password:{type:String,required:true}
-})
+var userSchema=require('./schemaDB/user').userSchema;
 var model=mongoose.model("users",userSchema);
 
 
@@ -21,4 +17,3 @@ exports.register=function(req,res){
 		}
 	})
 }
-exports.userSchema=userSchema;

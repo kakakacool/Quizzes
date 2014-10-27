@@ -7,7 +7,8 @@ var routes=require("./routes");
 var loginRoute=require("./routes/login");
 var usersRoute=require("./routes/users");
 var adminRoute=require("./routes/admin");
-var addQuizzes=require("./routes/addQuizzes");
+var addTests=require("./routes/addTests");
+var deleteTest=require("./routes/deleteTest")
 var registerRoute=require("./routes/register");
 var app=express();
 
@@ -43,12 +44,15 @@ router
 		.get(usersRoute.users)
 		.post(loginRoute.login)
 
+
 router
 	.route('/admin')
 		.get(adminRoute.admin)
-		.post(addQuizzes.addQuizzes)
+		.post(addTests.addTests)
 
-
+router
+	.route('/admin/:test')
+		.delete(deleteTest.deleteTest)
 
 app.use("/",router);
 

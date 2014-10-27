@@ -9,3 +9,15 @@ body {
   border-radius: 3px;
   text-align: center;
 }
+#Tests li {
+  background-color: #fff;
+  border: 1px solid #ffa500;
+  height: 220px;
+}
+#Tests img {
+  height: 100px;
+  width: 100px;
+}
+.page-header {
+  color: #fff;
+}
