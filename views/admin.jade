@@ -173,6 +173,7 @@ block content
 						"</div>"+
 					"</div>"+
 				"</div>");
+			$(".addAnswer").unbind('click');
 			$(".addAnswer").on('click',function(e){
 				e.preventDefault();
 				$(this).prev().before("<input class='answer form-control' placeholder='Enter answer' type='text'>");
