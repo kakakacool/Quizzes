@@ -55,9 +55,26 @@ block content
 							button.btn.btn-primary#saveQuestion(type='submit') Save Questions
 							button.btn.btn-default(type='button', data-dismiss='modal') Close
 							.alert#questionResult(align='center')
-	// Change Quiestions
 
-	// Delete Quiestions
+
+	// Change Quiestions
+	.row
+		.col-md-12
+			.modal.fade#changeQuestions(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+				.modal-dialog
+					.modal-content
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4#myModalLabel.modal-title(align='center').alert-warning Edit Questions
+						.modal-body
+							form(role='form' method='GET' class='forma').changeForm
+															
+							.alert.changeQuestions
+						.modal-footer
+							button.btn.btn-default(type='button', data-dismiss='modal') Close
+							.alert#changeResult(align='center')
 
 	.row
 		.col-md-12#Tests
@@ -66,7 +83,7 @@ block content
 					li.col-md-2
 						img(src='#{tests[i].url}')
 						button.btn.btn-success.btn-block.add(name='#{tests[i].name}',data-toggle='modal', data-target='#addQuestions' data-backdrop="static") Add Questions 
-						button.btn.btn-warning.btn-block.change(name='#{tests[i].name}') Change Questions
+						button.btn.btn-warning.btn-block.change(name='#{tests[i].name}',data-toggle='modal', data-target='#changeQuestions' data-backdrop="static" ) Change Questions
 						button.btn.btn-danger.btn-block.delete(name='#{tests[i].name}') Delete Test
 				- }
 					
@@ -182,8 +199,91 @@ block content
 
 		//change question
 		$(".change").on('click',function(){
-			//- alert($(this).attr('name'))
+			var test=$(this).attr("name");
+			$.get('/admin/question',{test:test},function(data){
+				if(data.success){
+					var qArr=data.arr;
+					$('.changeForm').html("");
+					for(var i=0;i<qArr.length;i++){
+						var str="";
+						var arr=qArr[i].answers;
+						str+="<div class='form-group row' style='border:1px solid orange;border-radius:5px'>"+
+								"<div class='col-md-10 col-md-offset-1'>"+
+									"<div class='form-group'>"+
+										"<label for='name'>Question:</label>"+
+										"<textarea class='form-control questionText'>"+qArr[i].text+"</textarea>"+
+									"</div>"+
+									"<div class='form-group answers'>"+
+										"<label for='answers'>Answers:</label>";
+						for(var j=0;j<arr.length-1;j++){
+							str+="<input class='answer form-control' value='"+arr[j]+"' type='text'>";
+						}
+						str+="<input class='answer form-control' value='"+arr[arr.length-1]+"' type='text'>";
+						str+="<button class='btn btn-warning changeQ ' name='"+qArr[i]._id+"' data-loading-text='Saving...'>change</button>"+
+								"<button class='btn btn-danger deleteQ ' name='"+qArr[i]._id+"'>delete</button>"+
+									"</div>"+
+								"</div>"+
+							"</div>";
+						$('.changeForm').append(str);
+					}
+					$('.changeQ').on('click',function(e){
+						e.preventDefault();
+						var btn = $(this)
+						btn.button('loading')
+						var _id=btn.attr("name");
+						var divi=btn.parent().parent()
+						var text=divi.find('textarea').val();
+						var ans=divi.find('input');
+						var answers=[];
+						for(var i=0;i<ans.length;i++){
+							answers.push($(ans[i]).val());
+						}
+						var object={}
+						object._id=_id;
+						object.text=text;
+						object.answers=answers;
+						$.ajax({
+								url:'/admin/question',
+								type:'PUT',
+								data:{obj:JSON.stringify(object)},
+								success:function(data){
+									alert(data.text);
+								},
+								error:function(err){
+									alert(err);
+								}
+							}).always(function () {
+							btn.button('reset')
+						});
+					})
+					$('.deleteQ').on('click',function(e){
+						e.preventDefault();
+						var btn = $(this)
+						btn.button('loading')
+						var _id=btn.attr("name");
+						$.ajax({
+								url:'/admin/question',
+								type:'DELETE',
+								data:{_id:_id},
+								success:function(data){
+									alert(data.text);
+								},
+								error:function(err){
+									alert(err);
+								}
+							}).always(function () {
+							btn.button('reset')
+						});
+					})
 
+					$(".changeQuestions").removeClass("alert-danger");
+					$(".changeQuestions").addClass("alert-success");
+					$(".changeQuestions").html(data.data);
+				}else{
+					$(".changeQuestions").addClass("alert-danger");
+					$(".changeQuestions").html(data.text);	
+				}
+			});
 		});
 
 

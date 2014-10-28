@@ -8,9 +8,17 @@ exports.addQuestion=function (req,res) {
 	for(var i=0;i<questions.length;i++){
 		if(validate(questions[i])){
 			var question=questions[i];
+			var arr=question.answers;
+			var filterAns=[];
+			for(var i=0;i<arr.length-1;i++){
+				if(arr[i].trim()!=""){
+					filterAns.push(arr[i].trim())
+				}
+			}
+			filterAns.push(arr[arr.length-1].trim())
 			new questionModel({
-				text:question.text,
-				answers:question.answers,
+				text:question.text.trim(),
+				answers:filterAns,
 				test:question.test
 			}).save(function(err,data){
 				if(err){
@@ -22,10 +30,10 @@ exports.addQuestion=function (req,res) {
 		}
 	}
 	if(error){
-			res.json({success:false,text:"Some Question(s) not saved"});
-		}else{
-			res.json({success:true,text:"Question(s) saved"});
-		}	
+		res.json({success:false,text:"Some Question(s) not saved"});
+	}else{
+		res.json({success:true,text:"Question(s) saved"});
+	}	
 }
 function validate(obj){
 	if(obj.text==""){
@@ -34,16 +42,14 @@ function validate(obj){
 	var arr=obj.answers;
 	var filterArr=[];
 	for(var i=0;i<arr.length-1;i++){
-		if(arr[i]!=""){
+		if(arr[i].trim()!=""){
 			filterArr.push(arr[i])
 		}
 	}
 	if(filterArr.length<2){
 		return false;
 	}
-	console.log(arr[arr.length-1]);
 	if(arr[arr.length-1]==-1){
-		console.log("-1 gamochnda");
 		return false;
 	}
 	return true;

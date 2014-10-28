@@ -10,6 +10,9 @@ var adminRoute=require("./routes/admin");
 var addTests=require("./routes/addTests");
 var deleteTest=require("./routes/deleteTest")
 var addQuestion=require("./routes/addQuestion");
+var getQuestion=require("./routes/getQuestion");
+var changeQuestion=require("./routes/changeQuestion");
+var deleteQuestion=require("./routes/deleteQuestion");
 var registerRoute=require("./routes/register");
 var app=express();
 
@@ -52,7 +55,10 @@ router
 		.post(addTests.addTests)
 router
 	.route('/admin/question')
+		.get(getQuestion.getQuestion)
 		.post(addQuestion.addQuestion)
+		.put(changeQuestion.changeQuestion)
+		.delete(deleteQuestion.deleteQuestion)
 		
 router
 	.route('/admin/:test')
