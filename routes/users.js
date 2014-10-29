@@ -1,5 +1,10 @@
 
 
 exports.users=function(req,res) {
-	res.send(req.cookies.email);
+	var email=req.cookies.email;
+	if(email==undefined||email=="admin@gmail.com"){
+		res.redirect('/');
+	}else{
+		res.render('user',{title:"users"});
+	}
 }
