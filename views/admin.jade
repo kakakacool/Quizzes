@@ -92,9 +92,9 @@ block content
 
 
 	script.
-		
 		$('#addTests').on('click',function(e){
 			e.preventDefault();
+			alert("me")
 			var testsName=$("#testsName").val();
 			var testsImage=$("#testsImage").val().split("\\");
 			testsImage="/images/"+testsImage[testsImage.length-1];

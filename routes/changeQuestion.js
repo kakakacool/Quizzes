@@ -6,11 +6,17 @@ exports.changeQuestion=function(req,res) {
 	var question=JSON.parse(req.body.obj);
 	var _id=question._id;
 	delete question._id
+	var arr=question.answers;
+	for(var i=0;i<question.answers.length;i++){
+		if(question.answers[i]==""){
+			question.answers.splice(i,i+1);
+		}
+	}
 	questionModel.update({_id:_id},question,function(err,data){
 		if(err){
-			res.json({success:false,text:"There was problem while deleting question"});
+			res.json({success:false,text:"There was problem while changing question"});
 		}else{
-			res.json({success:true,text:"Question Deleted"});
+			res.json({success:true,text:"Question Changed"});
 		}
 	})
 }

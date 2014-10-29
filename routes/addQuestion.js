@@ -15,7 +15,7 @@ exports.addQuestion=function (req,res) {
 					filterAns.push(arr[i].trim())
 				}
 			}
-			filterAns.push(arr[arr.length-1].trim())
+			filterAns.push(arr[arr.length-1])
 			new questionModel({
 				text:question.text.trim(),
 				answers:filterAns,

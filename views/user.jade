@@ -1,7 +1,96 @@
 extends layout
 block content
 	.page-header 
-		h1(align='center') Quizzes #{title}
+		h1(align='center') #{title}
+	.row
+		.col-md-12#userTests
+			ul.list-inline
+				- for (var i in tests) {
+					li.col-md-2
+						img(src='#{tests[i].url}')
+						button.btn.btn-success.btn-block.startQuiz(name='#{tests[i].name}',data-toggle='modal', data-target='#startQuiz' data-backdrop="static") Start Quiz 
+				- }
 	.row
 		.col-md-12
+			.modal.fade#startQuiz(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+				.modal-dialog
+					.modal-content
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4#myModalLabel.modal-title.alert-danger(align='center')
+						.modal-body
+							.form-group
+								h4.question 
+							.form-group.answers
+						.modal-footer
+							button.btn.btn-primary.disabled#next Next
+							button.btn.btn-default(type='button', data-dismiss='modal') Close
+	script.
+		var qArr,k=0,n;
+		var count;
+		var array=[];
+		$('.startQuiz').on('click',function(){
+			var test=$(this).attr("name");
+			$.get('/admin/question',{test:test},function(data){
+				if(data.success){
+					qArr=data.arr;
+					n=data.arr.length;
+					//- alert(JSON.stringify(data.arr));
+					count=0;
+					nexti();
+					bindi();
+					$('#next').on('click',function(){
+						$(this).addClass('disabled');
+						if(selected==qArr[k-1].answers[qArr[k-1].answers.length-1])
+							count++;
+						nexti();
+						bindi();
+					})
+				}else{
+					$('.modal-title').html("Questions not found for this category");
+				}
+			});
+		})
+
+		var nexti=(function(){
+			$('.answers').text("");
+			$('.question').text(qArr[k].text);
+			for(var i=0;i<qArr[k].answers.length-1;i++){
+				$('.answers').append($("<p name='"+(i+1)+"'></p>").text(qArr[k].answers[i]));
+				
+			}
+			if(k==n-1){
+				$('#next').addClass('btn-danger');
+				$('#next').unbind('click');
+				$('#next').html('Finish');
+				$('#next').on('click',function(){
+					if(selected==qArr[k-1].answers[qArr[k-1].answers.length-1])
+							count++;
+					$('.answers').text("");
+					$('.question').text("YOUR SCORE IS "+(count/n)*100+" %");
+					$('#next').remove();
+				});
+			}
+			k++;
 			
+		});
+		var selected;
+		function bindi(){
+			$('.answers p').on('mouseover',function(){
+				this.style.border="3px solid DodgerBlue"
+			}).on('mouseout',function(){
+				this.style.border="3px solid Lavender"
+			}).on('click',function(){
+				selected=Number($(this).attr('name'));
+				$('#next').removeClass('disabled');
+				$(this).siblings().css('border-color','Lavender');
+				$(this).siblings().bind('mouseout',function(){
+					this.style.border="3px solid Lavender"
+				});
+				this.style.border="3px solid DodgerBlue"
+				$(this).unbind('mouseout');
+
+			})
+		}
