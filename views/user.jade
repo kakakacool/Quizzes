@@ -26,7 +26,7 @@ block content
 							.form-group.answers
 						.modal-footer
 							button.btn.btn-primary.disabled#next Next
-							button.btn.btn-default(type='button', data-dismiss='modal') Close
+							button.btn.btn-default.closed(type='button', data-dismiss='modal') Close
 	script.
 		var qArr,k=0,n;
 		var count;
@@ -35,7 +35,7 @@ block content
 			var test=$(this).attr("name");
 			$.get('/admin/question',{test:test},function(data){
 				if(data.success){
-					qArr=data.arr;
+					qArr=_.shuffle(data.arr);
 					n=data.arr.length;
 					//- alert(JSON.stringify(data.arr));
 					count=0;
@@ -94,3 +94,9 @@ block content
 
 			})
 		}
+		$('.close').click(function(){
+			location.reload();
+		})
+		$('.closed').click(function(){
+			location.reload();
+		})

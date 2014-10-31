@@ -6,7 +6,7 @@ exports.changeQuestion=function(req,res) {
 	var question=JSON.parse(req.body.obj);
 	var _id=question._id;
 	delete question._id
-	var arr=question.answers;
+	
 	for(var i=0;i<question.answers.length;i++){
 		if(question.answers[i]==""){
 			question.answers.splice(i,i+1);
