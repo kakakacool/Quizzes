@@ -29,7 +29,6 @@ block content
 						.alert-success.index
 	script.
 		$("#login").on('click',function(e){
-			alert('login')
 			e.preventDefault();
 			var email=$("#email").val().trim();
 			var password=$("#password").val().trim();
@@ -56,7 +55,6 @@ block content
 		});
 		$("#register").on('click',function(e){
 			e.preventDefault();
-			alert('register');
 			var email=$("#email").val().trim();
 			var password=$("#password").val().trim();
 			if(!email){
