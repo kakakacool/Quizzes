@@ -246,10 +246,10 @@ block content
 								type:'PUT',
 								data:{obj:JSON.stringify(object)},
 								success:function(data){
-									alert('question changed')
+									alert(data.text);
 								},
 								error:function(err){
-									alert(err)
+									alert(err);
 								}
 							}).always(function () {
 							btn.button('reset')
@@ -265,10 +265,10 @@ block content
 								type:'DELETE',
 								data:{_id:_id},
 								success:function(data){
-									btn.closest('.row').remove();
+									alert(data.text);
 								},
 								error:function(err){
-									alert(err)
+									alert(err);
 								}
 							}).always(function () {
 							btn.button('reset')
@@ -296,4 +296,3 @@ block content
 				}
 			})
 		})
-
