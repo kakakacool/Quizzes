@@ -17,7 +17,7 @@ var registerRoute=require("./routes/register");
 var app=express();
 
 var mongoose=require('mongoose');
-mongoose.connect('mongodb://kaxi1993:kaxi@ds053090.mongolab.com:53090/quizzes',function(err,data){
+mongoose.connect('mongodb://localhost/Quizzes',function(err,data){
 	if(!err){
 		console.log("connected to database");
 	}
@@ -26,7 +26,7 @@ mongoose.connect('mongodb://kaxi1993:kaxi@ds053090.mongolab.com:53090/quizzes',f
 	}
 });
 
-app.set('port', (process.env.PORT || 5000))
+app.set('port',process.env.PORT||3000);
 app.set('views',__dirname+'/views');
 app.set('view engine','jade');
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -67,6 +67,9 @@ router
 
 app.use("/",router);
 
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-})
+app.listen(3000,function(err,data) {
+	if(err){
+		console.log("error while connecting this port");
+	}
+	console.log("connected PORT: "+app.get('port'));
+});

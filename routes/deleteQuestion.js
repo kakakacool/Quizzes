@@ -7,9 +7,9 @@ exports.deleteQuestion=function(req,res) {
 
 	questionModel.remove({_id:_id},function(err,data){
 		if(err){
-			res.json({success:false,text:"There was problem while changing question"});
+			res.json({success:false,text:"There was problem while Deleting question"});
 		}else{
-			res.json({success:true,text:"Question Changed"});
+			res.json({success:true,text:"Question Deleted"});
 		}
 	})
 }

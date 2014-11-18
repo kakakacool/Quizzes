@@ -7,7 +7,7 @@ exports.changeQuestion=function(req,res) {
 	var _id=question._id;
 	delete question._id
 	
-	for(var i=0;i<question.answers.length;i++){
+	for(var i=0;i<question.answers.length-1;i++){
 		if(question.answers[i]==""){
 			question.answers.splice(i,i+1);
 		}
