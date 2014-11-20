@@ -69,12 +69,12 @@ block content
 					if(selected==qArr[k-1].answers[qArr[k-1].answers.length-1])
 							count++;
 					$('.answers').text("");
-					$('.question').text("YOUR SCORE IS "+(count/n)*100+" %");
+					$('.question').text("YOUR SCORE IS "+Math.ceil((count/n)*100)+" %");
 					$('#next').remove();
 				});
 			}
 			k++;
-			
+			 
 		});
 		var selected;
 		function bindi(){
