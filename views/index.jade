@@ -1,6 +1,6 @@
 extends layout
 block content
-	.page-header 
+	.page-header.alert
 		h1(align='center') Quizzes
 	.row
 		.col-md-4.col-md-offset-4
@@ -21,22 +21,22 @@ block content
 				.form-group		
 					.col-md-12
 						button.btn.btn-danger.btn-block#register	Registration
-				.form-group
-					.col-md-12
-						.alert-danger.index
-				.form-group
-					.col-md-12
-						.alert-success.index
 	script.
 		$("#login").on('click',function(e){
 			e.preventDefault();
 			var email=$("#email").val().trim();
 			var password=$("#password").val().trim();
 			if(!email){
-				$("#email").addClass("alert-danger");
+				$("#email").css("border","1px solid red");
+				$(".page-header").addClass("alert-warning",1500,"easeOutBounce" );
+				$(".page-header h1").html("fill all fields");
+				$("#email").focus();
 			}
 			if(!password){
-				$("#password").addClass("alert-danger");
+				$("#password").css("border","1px solid red");
+				$(".page-header").addClass("alert-warning",1500,"easeOutBounce" );
+				$(".page-header h1").html("fill all fields");
+				$("#password").focus();
 			}
 			if(!password||!email)
 				return;
@@ -48,8 +48,8 @@ block content
 						window.location="/users";
 					}
 				}else{
-					$(".alert-danger").html(data.text);
-					$(".alert-success").html("");
+					$(".page-header").addClass("alert-warning",2000,"easeOutBounce" );
+					$(".page-header h1").html(data.text);
 				}
 			});
 		});
@@ -58,19 +58,27 @@ block content
 			var email=$("#email").val().trim();
 			var password=$("#password").val().trim();
 			if(!email){
-				$("#email").addClass("alert-danger");
+				$("#email").css("border","1px solid red");
+				$(".page-header").addClass("alert-warning",2000,"easeOutBounce" );
+				$(".page-header h1").html("fill all fields");
+				$("#email").focus();
 			}
 			if(!password){
-				$("#password").addClass("alert-danger");
+				$("#password").css("border","1px solid red");
+				$(".page-header").addClass("alert-warning",1500,"easeOutBounce" );
+				$(".page-header h1").html("fill all fields");
+				$("#password").focus();
 			}
 			if(!password||!email)
 				return;
+
 			$.post("/",{email:email,password:password},function(data){
 				if(data.success){
-					$(".alert-success").html(data.text);
-					$(".alert-danger").html("");
+					$(".page-header").addClass("alert-success",1500,"easeOutBounce" );
+					$(".page-header h1").html(data.text);
 				}else{
-					$(".alert-danger").html(data.text);
+					$(".page-header").addClass("alert-warning",1500,"easeOutBounce" );
+					$(".page-header h1").html(data.text);
 				}
 				
 			});

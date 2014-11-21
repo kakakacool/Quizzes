@@ -37,3 +37,9 @@ body {
   cursor: pointer;
   padding: 10px;
 }
+#email {
+  border: 1px solid #fff;
+}
+#password {
+  border: 1px solid #fff;
+}
