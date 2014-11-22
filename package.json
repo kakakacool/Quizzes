@@ -18,7 +18,11 @@
     "node": "0.10.x"
   },
   "repository": {
+<<<<<<< HEAD
     "type": "git",
+=======
+    "type": "git", 
+>>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
     "url": "https://github.com/kaxi1993/Quizzes.git"
   },
   "keywords": [

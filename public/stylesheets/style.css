@@ -1,9 +1,12 @@
 body {
   background-image: url("/images/background.png");
   background-position: center;
+<<<<<<< HEAD
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+=======
+>>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
   background-size: cover;
 }
 .index {
@@ -40,3 +43,12 @@ body {
   cursor: pointer;
   padding: 10px;
 }
+<<<<<<< HEAD
+=======
+#email {
+  border: 1px solid #fff;
+}
+#password {
+  border: 1px solid #fff;
+}
+>>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
