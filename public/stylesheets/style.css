@@ -37,3 +37,18 @@ body {
   cursor: pointer;
   padding: 10px;
 }
+#email {
+  border: 1px solid #fff;
+}
+#password {
+  border: 1px solid #fff;
+}
+.popover {
+  color: #fff;
+  font-size: 17px;
+  width: 150px;
+  background: Tomato !important;
+}
+.tani {
+  height: 200px;
+}

@@ -1,7 +1,9 @@
 body
 	background-image url('/images/background.png')
 	background-position center
-	background-size cover
+	-moz-background-size cover 
+	-o-background-size cover
+	background-size cover 
 
 .index
 	font-size 22px
@@ -28,10 +30,8 @@ body
 	width 100px
 
 
-
-
 .page-header
-	color white
+	color:white
 
 .answers p
 	border 3px solid Lavender
@@ -39,18 +39,3 @@ body
 	min-height: 50px
 	cursor pointer
 	padding 10px
-
-#email
-	border 1px solid white
-
-#password
-	border 1px solid white
-
-.popover
-	color white
-	font-size 17px
-	width 150px
-	background: Tomato!important
-
-.tani
-	height 200px
