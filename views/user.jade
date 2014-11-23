@@ -69,12 +69,20 @@ block content
 					if(selected==qArr[k-1].answers[qArr[k-1].answers.length-1])
 							count++;
 					$('.answers').text("");
+<<<<<<< HEAD
 					$('.question').text("YOUR SCORE IS "+(count/n)*100+" %");
+=======
+					$('.question').text("YOUR SCORE IS "+Math.ceil((count/n)*100)+" %");
+>>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
 					$('#next').remove();
 				});
 			}
 			k++;
+<<<<<<< HEAD
 			
+=======
+			 
+>>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
 		});
 		var selected;
 		function bindi(){
