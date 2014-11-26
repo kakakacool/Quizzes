@@ -1,0 +1,65 @@
+body {
+  background-image: url("/images/background.png");
+  background-position: center;
+  background-size: cover;
+}
+.index {
+  font-size: 22px;
+  font-weight: bolder;
+  border-radius: 3px;
+  text-align: center;
+}
+#Tests li {
+  background-color: #fff;
+  border: 1px solid #ffa500;
+  height: 220px;
+}
+#Tests img {
+  height: 100px;
+  width: 100px;
+}
+#userTests li {
+  background-color: #fff;
+  border: 1px solid OrangeRed;
+  height: 190px;
+  width: 33%;
+}
+#userTests li button {
+  background-color: #ff6347;
+  border: 0px;
+}
+#userTests img {
+  height: 100px;
+  width: 100px;
+}
+.table {
+  color: #a0522d;
+  background-color: AliceBlue;
+  font-size: 17px;
+  font-weight: bold;
+}
+.page-header {
+  color: #fff;
+}
+.answers p {
+  border: 3px solid Lavender;
+  border-radius: 5px;
+  min-height: 50px;
+  cursor: pointer;
+  padding: 10px;
+}
+#email {
+  border: 1px solid #fff;
+}
+#password {
+  border: 1px solid #fff;
+}
+.popover {
+  color: #fff;
+  font-size: 17px;
+  width: 150px;
+  background: Tomato !important;
+}
+.tani {
+  height: 200px;
+}

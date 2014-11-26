@@ -1,0 +1,53 @@
+extends layout
+block content
+	.page-header 
+		h1(align='center') #{title}
+	.row
+		.col-md-8#userTests
+			ul.list-inline
+				- for (var i in tests) {
+					li.col-md-2
+						img(src='#{tests[i].url}')
+						p
+						.progress
+							.progress-bar(class="progress-bar-success " role='progressbar', aria-valuenow='#{tests[i].score}', aria-valuemin='0', aria-valuemax='100', style='width:#{tests[i].score}%;')| #{tests[i].score}
+						button.btn.btn-success.btn-block.startQuiz(name='#{tests[i].name}',data-toggle='modal', data-target='#startQuiz' data-backdrop="static") Start Quiz 
+				- }
+		.col-md-3.col-md-offset-1.table-responsive
+			table.table
+				thead
+					tr
+						th #
+						th username
+						th score
+				tbody
+					tr
+						td 1
+						td kaxi1993
+						td 86
+					tr
+						td 2
+						td ggola
+						td 72
+					tr
+						td 3
+						td John
+						td 50
+	.row
+		.col-md-12
+			.modal.fade#startQuiz(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+				.modal-dialog
+					.modal-content
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4#myModalLabel.modal-title.alert-danger(align='center')
+						.modal-body
+							.form-group
+								h4.question 
+							.form-group.answers
+						.modal-footer
+							button.btn.btn-primary.disabled#next Next
+							button.btn.btn-default.closed(type='button', data-dismiss='modal') Close
+	script(src='/javascripts/user.js')

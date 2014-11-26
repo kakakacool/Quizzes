@@ -1,0 +1,60 @@
+extends layout
+block content
+	.page-header.alert
+		h1(align='center') Quizzes
+	.row
+		.col-md-4.col-md-offset-4.indexForm
+			form(role='form' method='POST')
+				.form-group
+					.col-md-12
+						label(for="email") Email address:
+						input(autocomplete='false' type="email" class="form-control" name="email"
+						 id="email" placeholder="Enter email" data-toggle="popover" data-placement="right" data-content="write email")
+				.form-group
+					.col-md-12
+						label(for="password") Password:
+						input(type="password" class="form-control" id="password" 
+							placeholder="Enter Password" name="password" data-toggle="popover" data-placement="right" data-content="write password")
+				.form-group
+					.col-md-12
+						button.btn.btn-success.btn-block#login	log In
+				.form-group		
+					.col-md-12
+						button.btn.btn-danger.btn-block.respond(data-toggle='modal', data-target='.registration')	Registration
+	.row
+		.col-md-12
+			.modal.fade.registration(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+				.modal-dialog
+					.modal-content
+						.modal-header
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h2#myModalLabel.modal-title(align='center')	Registartion
+						.modal-body.tani
+							form(role='form' method='POST')
+								.form-group
+									.col-md-3
+										label(for='name')	Full Name:
+									.col-md-7
+										input.form-control.fullname(type='text', placeholder='ex. John Doe' data-toggle="popover" data-placement="right" data-content="write fullname")
+								.form-group
+									.col-md-3
+										label(for='username')	username:
+									.col-md-7
+										input.form-control.username(type='text', placeholder='Enter username' data-toggle="popover" data-placement="right" data-content="write username")
+								.form-group
+									.col-md-3
+										label(for='email')	email:
+									.col-md-7
+										input.form-control.email(type='email', placeholder='Enter email' data-toggle="popover" data-placement="right" data-content="write email")
+								.form-group
+									.col-md-3
+										label(for='password')	password:
+									.col-md-7
+										input.form-control.password(type='password', placeholder='Enter password' data-toggle="popover" data-placement="right" data-content="write password")
+						.modal-footer
+							button.btn.btn-primary(type='submit')#register Register
+							button.btn.btn-default(type='button', data-dismiss='modal') Close
+	script(src='/javascripts/index.js')			
