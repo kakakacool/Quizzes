@@ -1,6 +1,15 @@
 body {
   background-image: url("/images/background.png");
   background-position: center;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+=======
+>>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
+>>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
   background-size: cover;
 }
 .index {
@@ -21,23 +30,30 @@ body {
 #userTests li {
   background-color: #fff;
   border: 1px solid OrangeRed;
+<<<<<<< HEAD
   height: 190px;
   width: 33%;
 }
 #userTests li button {
   background-color: #ff6347;
   border: 0px;
+=======
+  height: 150px;
+>>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 }
 #userTests img {
   height: 100px;
   width: 100px;
 }
+<<<<<<< HEAD
 .table {
   color: #a0522d;
   background-color: AliceBlue;
   font-size: 17px;
   font-weight: bold;
 }
+=======
+>>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 .page-header {
   color: #fff;
 }
@@ -48,12 +64,24 @@ body {
   cursor: pointer;
   padding: 10px;
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> d8602cb6499071e98739a3297304e14c37174c1b
+>>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 #email {
   border: 1px solid #fff;
 }
 #password {
   border: 1px solid #fff;
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 .popover {
   color: #fff;
   font-size: 17px;
@@ -63,3 +91,9 @@ body {
 .tani {
   height: 200px;
 }
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
+>>>>>>> d8602cb6499071e98739a3297304e14c37174c1b
+>>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9

@@ -3,11 +3,16 @@ block content
 	.page-header 
 		h1(align='center') #{title}
 	.row
+<<<<<<< HEAD
 		.col-md-8#userTests
+=======
+		.col-md-12#userTests
+>>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 			ul.list-inline
 				- for (var i in tests) {
 					li.col-md-2
 						img(src='#{tests[i].url}')
+<<<<<<< HEAD
 						p
 						.progress
 							.progress-bar(class="progress-bar-success " role='progressbar', aria-valuenow='#{tests[i].score}', aria-valuemin='0', aria-valuemax='100', style='width:#{tests[i].score}%;')| #{tests[i].score}
@@ -33,6 +38,10 @@ block content
 						td 3
 						td John
 						td 50
+=======
+						button.btn.btn-success.btn-block.startQuiz(name='#{tests[i].name}',data-toggle='modal', data-target='#startQuiz' data-backdrop="static") Start Quiz 
+				- }
+>>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 	.row
 		.col-md-12
 			.modal.fade#startQuiz(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
@@ -50,4 +59,88 @@ block content
 						.modal-footer
 							button.btn.btn-primary.disabled#next Next
 							button.btn.btn-default.closed(type='button', data-dismiss='modal') Close
+<<<<<<< HEAD
 	script(src='/javascripts/user.js')
+=======
+	script.
+		var qArr,k=0,n;
+		var count;
+		var array=[];
+		$('.startQuiz').on('click',function(){
+			var test=$(this).attr("name");
+			$.get('/admin/question',{test:test},function(data){
+				if(data.success){
+					qArr=_.shuffle(data.arr);
+					n=data.arr.length;
+					//- alert(JSON.stringify(data.arr));
+					count=0;
+					nexti();
+					bindi();
+					$('#next').on('click',function(){
+						$(this).addClass('disabled');
+						if(selected==qArr[k-1].answers[qArr[k-1].answers.length-1])
+							count++;
+						nexti();
+						bindi();
+					})
+				}else{
+					$('.modal-title').html("Questions not found for this category");
+				}
+			});
+		})
+
+		var nexti=(function(){
+			$('.answers').text("");
+			$('.question').text(qArr[k].text);
+			for(var i=0;i<qArr[k].answers.length-1;i++){
+				$('.answers').append($("<p name='"+(i+1)+"'></p>").text(qArr[k].answers[i]));
+				
+			}
+			if(k==n-1){
+				$('#next').addClass('btn-danger');
+				$('#next').unbind('click');
+				$('#next').html('Finish');
+				$('#next').on('click',function(){
+					if(selected==qArr[k-1].answers[qArr[k-1].answers.length-1])
+							count++;
+					$('.answers').text("");
+<<<<<<< HEAD
+					$('.question').text("YOUR SCORE IS "+(count/n)*100+" %");
+=======
+					$('.question').text("YOUR SCORE IS "+Math.ceil((count/n)*100)+" %");
+>>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
+					$('#next').remove();
+				});
+			}
+			k++;
+<<<<<<< HEAD
+			
+=======
+			 
+>>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
+		});
+		var selected;
+		function bindi(){
+			$('.answers p').on('mouseover',function(){
+				this.style.border="3px solid DodgerBlue"
+			}).on('mouseout',function(){
+				this.style.border="3px solid Lavender"
+			}).on('click',function(){
+				selected=Number($(this).attr('name'));
+				$('#next').removeClass('disabled');
+				$(this).siblings().css('border-color','Lavender');
+				$(this).siblings().bind('mouseout',function(){
+					this.style.border="3px solid Lavender"
+				});
+				this.style.border="3px solid DodgerBlue"
+				$(this).unbind('mouseout');
+
+			})
+		}
+		$('.close').click(function(){
+			location.reload();
+		})
+		$('.closed').click(function(){
+			location.reload();
+		})
+>>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9

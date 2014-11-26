@@ -5,18 +5,6 @@ html
 		meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
-<<<<<<< HEAD
-		script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
-=======
-<<<<<<< HEAD
-		script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
-=======
-<<<<<<< HEAD
-=======
-		script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
->>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
->>>>>>> d8602cb6499071e98739a3297304e14c37174c1b
->>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
 		link(rel='stylesheet', href='https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css')
 	body

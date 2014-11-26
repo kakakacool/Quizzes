@@ -10,10 +10,6 @@
     ,"method-override":"*"
     ,"mongoose":"*"
     ,"stylus":"*"
-<<<<<<< HEAD
-    ,"async":"*"
-=======
->>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
   },
   "scripts": {
     "start": "node app.js"
@@ -22,15 +18,7 @@
     "node": "0.10.x"
   },
   "repository": {
-<<<<<<< HEAD
-    "type": "git", 
-=======
-<<<<<<< HEAD
     "type": "git",
-=======
-    "type": "git", 
->>>>>>> 68ff6dc994d1ebe287868125fd2b882885c090f4
->>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
     "url": "https://github.com/kaxi1993/Quizzes.git"
   },
   "keywords": [
