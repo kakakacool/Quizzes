@@ -1,5 +1,4 @@
 var mongoose=require('mongoose');
-<<<<<<< HEAD
 
 var scoresSchema=require('./schemaDB/scores').scoresSchema;
 var scoreModel=mongoose.model('scores',scoresSchema);
@@ -11,18 +10,12 @@ var userSchema=require('./schemaDB/user').userSchema;
 var userModel=mongoose.model('users',userSchema);
 
 var async=require('async');
-=======
-var testsSchema=require('./schemaDB/test').testsSchema;
-
-var testsModel=mongoose.model("tests",testsSchema);
->>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 
 exports.users=function(req,res) {
 	var email=req.cookies.email;
 	if(email===undefined||email=="admin@gmail.com"){
 		res.redirect('/');
 	}else{
-<<<<<<< HEAD
 		async.waterfall([
 			function(callback){
 				testsModel.find({},{_id:0,__v:0},function(err,data){
@@ -68,20 +61,25 @@ exports.users=function(req,res) {
 					callback(null,objArr);
 				});
 			},
-			// function(objArr,callback){
-			// 	testsModel.aggregate({},{_id:0,__v:0},function(err,data){
-			// 		callback(null,data);
-			// 	});
-			// }
+			function(objArr,callback){
+				testsModel.findOne({},function(err,data){
+					scoreModel.aggregate([
+						{ $sort: { score : -1,time:1} },
+						{$match:{testName:data.name}}],function(err,data){
+						var finObj={};
+						finObj.tests=objArr;
+						finObj.rank=data;
+						callback(null,finObj);
+					});
+				});				
+			}
 		],
 		function(err,data){
-=======
-		testsModel.find({},{_id:0,__v:0},function(err,data){
->>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 			if(err||data.length==0){
 				res.render('user',{title:"No test found"});
 			}else{
-				res.render('user',{title:"Quizzes",tests:data});
+				
+				res.render('user',{title:"Quizzes",tests:data.tests,rank:data.rank});
 			}
 		});
 	}

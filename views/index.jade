@@ -20,10 +20,6 @@ block content
 						button.btn.btn-success.btn-block#login	log In
 				.form-group		
 					.col-md-12
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 						button.btn.btn-danger.btn-block.respond(data-toggle='modal', data-target='.registration')	Registration
 	.row
 		.col-md-12
@@ -31,10 +27,7 @@ block content
 				.modal-dialog
 					.modal-content
 						.modal-header
-<<<<<<< HEAD
 						.modal-header
-=======
->>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
 							button.close(type='button', data-dismiss='modal')
 								span(aria-hidden='true') ×
 								span.sr-only Close
@@ -64,102 +57,4 @@ block content
 						.modal-footer
 							button.btn.btn-primary(type='submit')#register Register
 							button.btn.btn-default(type='button', data-dismiss='modal') Close
-<<<<<<< HEAD
 	script(src='/javascripts/index.js')			
-=======
-	script.
-		$("#login").on('click',function(e){
-			e.preventDefault();
-			var inputs=$('.indexForm').find('input');
-			inputs.filter(function(){
-				return $(this).val().trim()=="";
-				}).popover('show').css("border","1px solid tomato").focus();
-=======
-						button.btn.btn-danger.btn-block#register	Registration
-	script.
-		$("#login").on('click',function(e){
-			e.preventDefault();
-			var email=$("#email").val().trim();
-			var password=$("#password").val().trim();
-			if(!email){
-				$("#email").css("border","1px solid tomato");
-				$("#email").popover("show");
-				$("#email").focus();
-			}
-			if(!password){
-				$("#password").css("border","1px solid tomato");
-				$("#password").popover("show");
-				$("#password").focus();
-			}
->>>>>>> d8602cb6499071e98739a3297304e14c37174c1b
-			if(!password||!email)
-				return;
-			$.post("/users",{email:email,password:password},function(data){
-				if(data.success){
-					if(email=="admin@gmail.com"){
-						window.location="/admin";
-					}else{
-						window.location="/users";
-					}
-				}else{
-					$(".page-header").addClass("alert-warning",2000,"easeOutBounce" );
-					$(".page-header h1").html(data.text);
-				}
-			});
-		});
-		$('.respond').on('click',function(e){
-			e.preventDefault();
-		});
-		$("#register").on('click',function(e){
-			e.preventDefault();
-<<<<<<< HEAD
-			var fullname=$(".fullname").val().trim();
-			var username=$(".username").val().trim();
-			var email=$(".email").val().trim();
-			var password=$(".password").val().trim();
-			var inputs=$('.tani').find('input');
-			inputs.filter(function(){
-				return $(this).val().trim()=="";
-				}).popover('show');
-			if(!password||!email||!username||!fullname)
-				return;
-
-			//- $.post("/",{email:email,password:password},function(data){
-			//- 	if(data.success){
-			//- 		$(".page-header").addClass("alert-success",1500,"easeOutBounce" );
-			//- 		$(".page-header h1").html(data.text);
-			//- 	}else{
-			//- 		$(".page-header").addClass("alert-warning",1500,"easeOutBounce" );
-			//- 		$(".page-header h1").html(data.text);
-			//- 	}
-			//- });
-		});
-=======
-			var email=$("#email").val().trim();
-			var password=$("#password").val().trim();
-			if(!email){
-				$("#email").css("border","1px solid tomato");
-				$("#email").popover("show");
-				$("#email").focus();
-			}
-			if(!password){
-				$("#password").css("border","1px solid tomato");
-				$("#password").popover("show");
-				$("#password").focus();
-			}
-			if(!password||!email)
-				return;
-
-			$.post("/",{email:email,password:password},function(data){
-				if(data.success){
-					$(".page-header").addClass("alert-success",1500,"easeOutBounce" );
-					$(".page-header h1").html(data.text);
-				}else{
-					$(".page-header").addClass("alert-warning",1500,"easeOutBounce" );
-					$(".page-header h1").html(data.text);
-				}
-				
-			});
-		});
->>>>>>> d8602cb6499071e98739a3297304e14c37174c1b
->>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9

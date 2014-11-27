@@ -3,7 +3,9 @@ var Schema=mongoose.Schema;
 var scoresSchema=new Schema({
 	testName:String,
 	taker:{type:Schema.Types.ObjectId,ref:'users'},
-	score:Number
+	takerUsername:String,
+	score:Number,
+	time:Number
 })
 
 exports.scoresSchema=scoresSchema;

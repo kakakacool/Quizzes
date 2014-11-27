@@ -14,10 +14,8 @@ var getQuestion=require("./routes/getQuestion");
 var changeQuestion=require("./routes/changeQuestion");
 var deleteQuestion=require("./routes/deleteQuestion");
 var registerRoute=require("./routes/register");
-<<<<<<< HEAD
 var scores=require('./routes/addScore');
-=======
->>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
+var rank=require('./routes/getRank');
 var app=express();
 
 var mongoose=require('mongoose');
@@ -51,13 +49,13 @@ router
 	.route('/users')
 		.get(usersRoute.users)
 		.post(loginRoute.login)
-<<<<<<< HEAD
 router
 	.route('/users/scores')
 		.post(scores.addScore)
-=======
 
->>>>>>> 6f004bee1a86ffb051373bf6a9b55579f11b8bf9
+router
+	.route('/users/rank')
+		.get(rank.getRank);
 
 router
 	.route('/admin')
