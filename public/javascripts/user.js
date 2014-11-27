@@ -2,11 +2,6 @@ var qArr,k=0,n;
 var count;
 var array=[];
 var test;
-$('tbody tr:eq(0)').css('background-color','#1975FF');
-$('tbody tr:eq(1)').css('background-color','#599CFF');
-$('tbody tr:eq(2)').css('background-color','#8BBAFF');
-$('tbody tr:eq(3)').css('background-color','#AECFFF');
-$('tbody tr:eq(4)').css('background-color','#CEE2FF');
 var time;
 var timeInterval
 $('.startQuiz').on('click',function(){
@@ -94,17 +89,19 @@ $('.closed').click(function(){
 $('li a').on('click',function(e){
 	e.preventDefault();
 	var test=$(this).html().trim();
-	$("#dLabel").html(test+" Ranking")
+	$("#dLabel").html(test+" Ranking <span class='caret'>")
 	var tbody=$('tbody');
 	tbody.html("");
 	$.get('/users/rank',{test:test},function(data){
 		if(data.success){
 			var arr=data.arr;
 			for(var i=0;i<arr.length;i++){
-				tbody.append("<tr><td>"+(i+1)+"</td><td>"+arr[i].takerUsername+"</td><td>"+arr[i].score+"</td><td>"+arr[i].time+"</td></tr>")
+				tbody.append("<tr><td>"+
+					(i+1)+"</td><td>"+arr[i].takerUsername+"</td><td>"+
+					arr[i].score+"</td><td>"+arr[i].time+"</td></tr>")
 			}
 		}else{
-			alert("test not found");
+			alert("Test Ranking not found");
 		}
 	});
 })

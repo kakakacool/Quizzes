@@ -65,7 +65,8 @@ exports.users=function(req,res) {
 				testsModel.findOne({},function(err,data){
 					scoreModel.aggregate([
 						{ $sort: { score : -1,time:1} },
-						{$match:{testName:data.name}}],function(err,data){
+						{$match:{testName:data.name}},
+						{$limit:5}],function(err,data){
 						var finObj={};
 						finObj.tests=objArr;
 						finObj.rank=data;

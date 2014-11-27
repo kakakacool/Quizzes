@@ -19,7 +19,7 @@ $("#login").on('click',function(e){
 			}
 		}else{
 			$(".page-header").addClass("alert-warning",2000,"easeOutBounce" );
-			$(".page-header h1").html(data.text);
+			$(".page-header h3").html(data.text);
 		}
 	});
 });
@@ -41,9 +41,10 @@ $("#register").on('click',function(e){
 
 	$.post("/",{fullname:fullname,username:username,email:email,password:password},function(data){
 		if(data.success){
+			inputs.val("");
 			$('.registration').modal('hide');
 			$(".page-header").addClass("alert-success",1500,"easeOutBounce" );
-			$(".page-header h2").html(data.text+" please log in");
+			$(".page-header h3").html(data.text+" please log in");
 		}else{
 			$(".modal-header").addClass("alert-warning",1500,"easeOutBounce" );
 			$(".modal-header h3").html(data.text);
