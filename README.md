@@ -1,6 +1,6 @@
 # Website for online tests 
 
-Build using  [Express 4](http://expressjs.com/) and [MongoDB](http://www.mongodb.org/).
+Build on  [Express 4](http://expressjs.com/) and [MongoDB](http://www.mongodb.org/).
 
 
 ## Running Locally
