@@ -1,0 +1,65 @@
+extends layout
+block content
+	.page-header 
+		h1(align='center') #{title}
+	.row
+		.col-md-8#userTests
+			ul.list-inline
+				- for (var i in tests) {
+					li.col-md-2
+						img(src='#{tests[i].url}')
+						p
+						.progress
+							.progress-bar(class="progress-bar-success " role='progressbar', aria-valuenow='#{tests[i].score}', aria-valuemin='0', aria-valuemax='100', style='width:#{tests[i].score}%;')| #{tests[i].score}%
+						button.btn.btn-success.btn-block.startQuiz(name='#{tests[i].name}',data-toggle='modal', data-target='#startQuiz' data-backdrop="static")
+							b Start Quiz 
+							span.glyphicon.glyphicon-pencil(aria-hidden="true" align="right")
+				- }
+		.col-md-4
+			.dropdown
+				button#dLabel.btn-primary(type='button', data-toggle='dropdown', aria-haspopup='true', role='button', aria-expanded='false')
+					|	html5	Ranking 
+					span.caret
+				ul.dropdown-menu(role='menu', aria-labelledby='dLabel')
+					-for (var i in tests) {
+						li
+							a(href="#")	#{i}
+					-}
+
+			table.table(style="border-radius:5px")
+				thead
+					tr
+						th 
+							span.glyphicon.glyphicon-user
+						th Username
+						th Score
+						th
+							span.glyphicon.glyphicon-time
+				tbody
+					- var t=0;
+					- for (var i in rank) {
+						tr
+							td #{++t}
+							td #{rank[i].takerUsername}
+							td #{rank[i].score}%
+							td #{rank[i].time}
+					-}
+	.row
+		.col-md-12
+			.modal.fade#startQuiz(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+				.modal-dialog
+					.modal-content
+						.modal-header
+							span.glyphicon.glyphicon-time.dro
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4#myModalLabel.modal-title.alert-danger(align='center')
+						.modal-body
+							.form-group
+								h4.question 
+							.form-group.answers
+						.modal-footer
+							button.btn.btn-primary.disabled#next Next
+							button.btn.btn-default.closed(type='button', data-dismiss='modal') Close
+	script(src='/javascripts/user.js')

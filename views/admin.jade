@@ -1,0 +1,89 @@
+extends layout
+block content
+	.page-header 
+		h1(align='center') Quizzes #{title}
+	// Add Tests
+	.row
+		.col-md-12
+			button.btn.btn-success.btn-lg(data-toggle='modal', data-target='#Tests') Create Test
+			.modal.fade#Tests(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+				.modal-dialog
+					.modal-content
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4#myModalLabel.modal-title(align='center') Create Test
+						.modal-body
+							form(role='form' method='POST')
+								.form-group
+									label(for='name') Test name
+									input#testsName.form-control(type='text', placeholder='Enter Test Name')
+								.form-group
+									label(for='images') Image For Test
+									input#testsImage(type='file')
+							.alert#createTests
+						.modal-footer
+							button.btn.btn-primary#addTests(type='submit') Add Test
+							button.btn.btn-default(type='button', data-dismiss='modal') Close
+	// Add Quiestions
+	.row
+		.col-md-12
+			.modal.fade#addQuestions(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+				.modal-dialog
+					.modal-content
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4#myModalLabel.modal-title(align='center').alert-warning Fill all fields otherwise questions will not be saved
+						.modal-body
+							form(role='form' method='POST' class='forma').questionsForm
+								.form-group.row(style='border:1px solid orange;border-radius:5px')
+									.col-md-10.col-md-offset-1
+										.form-group
+											label(for='name') Question:
+											textarea.questionText.form-control(placeholder='Enter question')
+										.form-group.answers
+											label(for='answers')	Answers:
+											input.answer.form-control(placeholder='Enter answer' type='text')
+											input.answer.form-control(placeholder='Enter answer' type='text')
+											input.answer.form-control(placeholder='Enter correct answer' type='number')
+											button.btn.btn-default.addAnswer add answer
+							button.btn.btn-success#addQuestion add new Quiestion
+						.modal-footer
+							button.btn.btn-primary#saveQuestion(type='submit') Save Questions
+							button.btn.btn-default(type='button', data-dismiss='modal') Close
+							.alert#questionResult(align='center')
+
+
+	// Change Quiestions
+	.row
+		.col-md-12
+			.modal.fade#changeQuestions(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+				.modal-dialog
+					.modal-content
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4#myModalLabel.modal-title(align='center').alert-warning Edit Questions
+						.modal-body
+							form(role='form' method='GET' class='forma').changeForm
+															
+							.alert.changeQuestions
+						.modal-footer
+							button.btn.btn-default(type='button', data-dismiss='modal') Close
+							.alert#changeResult(align='center')
+
+	.row
+		.col-md-12#Tests
+			ul.list-inline
+				- for (var i in tests) {
+					li.col-md-2
+						img(src='#{tests[i].url}')
+						button.btn.btn-success.btn-block.add(name='#{tests[i].name}',data-toggle='modal', data-target='#addQuestions' data-backdrop="static") Add Questions 
+						button.btn.btn-warning.btn-block.change(name='#{tests[i].name}',data-toggle='modal', data-target='#changeQuestions' data-backdrop="static" ) Change Questions
+						button.btn.btn-danger.btn-block.delete(name='#{tests[i].name}') Delete Test
+				- }
+	script(src='/javascripts/admin.js')
