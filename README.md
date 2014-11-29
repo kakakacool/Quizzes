@@ -8,7 +8,7 @@ Build on  [Express 4](http://expressjs.com/) and [MongoDB](http://www.mongodb.or
 Make sure you have [Node.js](http://nodejs.org/) installed
 
 ```sh
-$ git clone https://github.com/kaxi1993/Quizzes.git  # or clone your own fork
+$ git clone https://github.com/kaxi1993/Quizzes.git   # or clone your own fork
 $ cd Quizzes
 $ npm install
 $ npm start
