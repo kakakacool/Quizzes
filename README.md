@@ -1,4 +1,4 @@
-# Website for online tests 
+# Responsive web page for online testing
 
 Build on  [Express 4](http://expressjs.com/) and [MongoDB](http://www.mongodb.org/).
 
