@@ -1,3 +1,12 @@
+$('.logout').on('click',function(){
+	delete_cookie('username')
+	delete_cookie('email')
+	delete_cookie('_id')
+	window.location.replace('/');
+})
+function delete_cookie( name ) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
 $('#addTests').on('click',function(e){
 	e.preventDefault();
 	var testsName=$("#testsName").val();

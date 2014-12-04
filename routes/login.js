@@ -9,6 +9,8 @@ exports.login=function(req,res){
 		}
 		else{
 			res.cookie("email",req.body.email);
+			res.cookie("_id",data[0]._id);
+			res.cookie("username",data[0].username);
 			// console.log(req.cookies);
 			// res.clearCookie("email");
 			res.json({success:true});

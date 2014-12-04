@@ -1,5 +1,7 @@
 
 exports.index=function(req,res){
-	res.clearCookie('email');
+	if(req.cookies.username){
+		res.redirect('/users')
+	}
 	res.render('index',{title:'Quizzes'})
 }

@@ -3,6 +3,7 @@ var mongoose=require('mongoose');
 var scoresSchema=require('./schemaDB/scores').scoresSchema;
 var scoreModel=mongoose.model('scores',scoresSchema);
 
+
 exports.getRank=function(req,res) {
 	var test=req.url.split('=')[1];
 	scoreModel.aggregate([

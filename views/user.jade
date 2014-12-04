@@ -1,7 +1,10 @@
 extends layout
 block content
-	.page-header 
+	.page-header
 		h1(align='center') #{title}
+		p(align='right')
+			button.btn.btn-danger.logout
+				.span(aria-hidden='true' style='font-size: 1.1em').glyphicon.glyphicon-off
 	.row
 		.col-md-8#userTests
 			ul.list-inline

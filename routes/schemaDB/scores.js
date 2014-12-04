@@ -5,7 +5,8 @@ var scoresSchema=new Schema({
 	taker:{type:Schema.Types.ObjectId,ref:'users'},
 	takerUsername:String,
 	score:Number,
-	time:Number
+	time:Number,
+	passDate:Date
 })
 
 exports.scoresSchema=scoresSchema;

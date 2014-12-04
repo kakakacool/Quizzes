@@ -2,7 +2,9 @@ extends layout
 block content
 	.page-header 
 		h1(align='center') Quizzes #{title}
-	// Add Tests
+		p(align='right')
+			button.btn.btn-danger.logout
+				.span(aria-hidden='true' style='font-size: 1.1em').glyphicon.glyphicon-off
 	.row
 		.col-md-12
 			button.btn.btn-success.btn-lg(data-toggle='modal', data-target='#Tests') Create Test

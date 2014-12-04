@@ -1,3 +1,12 @@
+$('.logout').on('click',function(){
+	delete_cookie('username')
+	delete_cookie('email')
+	delete_cookie('_id')
+	window.location.replace('/');
+})
+function delete_cookie( name ) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
 var qArr,k=0,n;
 var count;
 var array=[];
@@ -26,7 +35,7 @@ $('.startQuiz').on('click',function(){
 				bindi();
 			})
 		}else{
-			$('.modal-title').html("Questions not found for this category");
+			$('.modal-title').html(data.text);
 		}
 	});
 })
