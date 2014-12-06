@@ -13,7 +13,7 @@ var async=require('async');
 
 exports.users=function(req,res) {
 	var email=req.cookies.email;
-	if(email===undefined||email=="admin@gmail.com"){
+	if(!email||email=="admin@gmail.com"){
 		res.redirect('/');
 	}else{
 		async.waterfall([
