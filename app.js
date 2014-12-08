@@ -47,7 +47,7 @@ app.set('port', (process.env.PORT || 5000))
 	})
 
 router
-	.route('')
+	.route('/')
 		.get(routes.index)
 		.post(registerRoute.register)
 
@@ -79,7 +79,7 @@ router
 		.delete(deleteTest.deleteTest)
 
 
-app.use('/',router)
+app.use(router)
 
 app.get('*', function(req, res){
   res.render('user',{title:"404 error Page not found"});
