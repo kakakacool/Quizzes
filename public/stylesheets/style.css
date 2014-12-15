@@ -1,5 +1,5 @@
 body {
-  background-image: url("/images/background.png");
+  background-image: url("/build/images/background.png");
   background-position: center;
   background-size: cover;
 }
@@ -74,7 +74,10 @@ body {
   color: #fff;
   font-size: 17px;
   width: 150px;
-  background: Tomato !important;
+  background: Tomato;
+}
+.popover.right .arrow:after {
+  border-right-color: Tomato;
 }
 .tani {
   height: 200px;
