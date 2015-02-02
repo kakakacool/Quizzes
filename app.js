@@ -20,7 +20,7 @@ var express=require("express"),
 	app=express(),
 	router=express.Router()
 
-	mongoose.connect('mongodb://localhost/quizzes',function(err,data){
+	mongoose.connect('mongodb://localhost:27017/quizzes',function(err,data){
 		if(!err){
 			console.log("connected to database");
 		}
